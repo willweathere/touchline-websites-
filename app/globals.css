@@ -61,6 +61,20 @@
   }
 }
 
+@layer utilities {
+  /* Scroll-reveal: sections start hidden and fade/slide up when in view */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.7, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* react-colorful sizing override */
 .react-colorful {
   width: 100% !important;
@@ -87,5 +101,10 @@
   *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+  /* Never hide content for reduced-motion users */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

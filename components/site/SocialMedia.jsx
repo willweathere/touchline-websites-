@@ -3,10 +3,10 @@
 import Link from "next/link";
 
 const PERKS = [
-  "AI agents write on-brand captions in your voice",
+  "On-brand posts written for your business",
   "Posts planned, created & scheduled for you",
   "Consistent posting across every platform",
-  "Smart hashtags & best-time-to-post built in",
+  "Smart hashtags & the best times to post",
   "You approve — we publish. Zero hassle.",
 ];
 
@@ -38,17 +38,17 @@ export default function SocialMedia() {
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-neon-pink/40 bg-neon-pink/[0.08] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-neon-pink">
             <span className="h-2 w-2 rounded-full bg-neon-pink shadow-glow-pink" />
-            New · AI-powered
+            Done-for-you
           </span>
 
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl">
-            We run your <span className="neon-text">social media</span> — with AI agents
+            Consistent <span className="neon-text">social media</span>, handled for you
           </h2>
 
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-300">
-            Not just websites. We create, write and schedule social media posts for your business —
-            powered by AI agents that learn your brand. Stay active on every platform without lifting
-            a finger.
+            More than websites — we keep your business posting. We plan, create and schedule
+            regular posts across every platform, so your socials stay active and consistent
+            while you get on with running things.
           </p>
 
           <ul className="mt-6 space-y-3">
@@ -74,16 +74,16 @@ export default function SocialMedia() {
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/#custom" className="btn-neon">
-              Get social media for my business
+            <Link href="/social-media" className="btn-neon">
+              See social media plans
             </Link>
-            <Link href="/services/social-media" className="btn-ghost">
-              See how it works
+            <Link href="/#custom" className="btn-ghost">
+              Talk to us
             </Link>
           </div>
         </div>
 
-        {/* Visual: a phone-style stack of AI-generated posts */}
+        {/* Visual: a phone-style stack of scheduled posts */}
         <div className="relative mx-auto w-full max-w-sm">
           <div className="rounded-[2rem] border border-white/10 bg-ink-900 p-4 shadow-2xl shadow-black/50">
             {/* header */}
@@ -97,7 +97,7 @@ export default function SocialMedia() {
                 <span className="text-sm font-bold text-white">Touchline Social</span>
               </div>
               <span className="inline-flex items-center gap-1 rounded-full border border-neon-cyan/40 bg-neon-cyan/[0.08] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-neon-cyan">
-                <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan" /> AI agent
+                <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan" /> Managed
               </span>
             </div>
 

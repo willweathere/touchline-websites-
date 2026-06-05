@@ -61,14 +61,16 @@ function ProjectCard({ name, type, url, blurb }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Open the live ${name} website in a new tab`}
-        className="relative block h-72 overflow-hidden sm:h-96"
+        className="relative block h-80 overflow-hidden"
       >
         <iframe
           src={url}
           title={`${name} — live website preview`}
           loading="lazy"
+          scrolling="no"
           tabIndex={-1}
-          className="pointer-events-none h-full w-full border-0 bg-ink-900"
+          style={{ width: "calc(100% + 18px)" }}
+          className="pointer-events-none h-full border-0 bg-ink-900"
         />
         {/* Hover overlay + visit pill */}
         <span className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-transparent to-transparent" />

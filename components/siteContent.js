@@ -151,3 +151,59 @@ export const TIER_DETAILS = {
 };
 
 export const tierDetailFor = (slug) => TIER_DETAILS[slug] ?? null;
+
+// ---- Social media management plans (monthly) — shown on /social-media ----
+export const SOCIAL_PLANS = [
+  {
+    value: "social-starter",
+    name: "Starter",
+    medal: "Bronze",
+    monthly: 50,
+    tagline: "Stay active",
+    summary: "Keep your business ticking over with regular, on-brand posts.",
+    perks: [
+      "8 posts per month",
+      "1 platform of your choice",
+      "On-brand captions written for you",
+      "Hashtag research included",
+      "Scheduled at the best times",
+      "Simple monthly content plan",
+    ],
+  },
+  {
+    value: "social-growth",
+    name: "Growth",
+    medal: "Silver",
+    monthly: 100,
+    popular: true,
+    tagline: "Most popular",
+    summary: "Build a real following with more posts across more platforms.",
+    perks: [
+      "16 posts per month",
+      "Up to 3 platforms",
+      "Captions, hashtags & emojis",
+      "Stories & post graphics designed",
+      "We reply to comments & DMs",
+      "Monthly performance report",
+    ],
+  },
+  {
+    value: "social-pro",
+    name: "Pro",
+    medal: "Gold",
+    monthly: 150,
+    tagline: "Maximum reach",
+    summary: "Full hands-off social media — daily content and short-form video.",
+    perks: [
+      "Daily posts (30 per month)",
+      "All major platforms",
+      "Short-form video & reels",
+      "Full community management",
+      "Trend & competitor tracking",
+      "Priority support + monthly strategy call",
+    ],
+  },
+];
+
+export const socialPlanFor = (value) =>
+  SOCIAL_PLANS.find((p) => p.value === value) ?? null;

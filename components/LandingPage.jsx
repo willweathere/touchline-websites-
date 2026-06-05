@@ -7,6 +7,7 @@ import { packageFor } from "./constants";
 import Nav from "./site/Nav";
 import Hero from "./site/Hero";
 import SocialMedia from "./site/SocialMedia";
+import Reveal from "./Reveal";
 import Pricing from "./site/Pricing";
 import Capabilities from "./site/Capabilities";
 import Features from "./site/Features";
@@ -89,15 +90,16 @@ export default function LandingPage() {
       <Nav />
       <main>
         <Hero />
-        <SocialMedia />
-        <Pricing />
-        <Capabilities />
-        <Features />
-        <Growth />
-        <Work />
-        <CustomRequest />
+        <Reveal><Pricing /></Reveal>
+        <Reveal><SocialMedia /></Reveal>
+        <Reveal><Capabilities /></Reveal>
+        <Reveal><Features /></Reveal>
+        <Reveal><Growth /></Reveal>
+        <Reveal><Work /></Reveal>
+        <Reveal><CustomRequest /></Reveal>
 
         {/* Build-your-own custom site (separate from the 3 fixed packages) */}
+        <Reveal>
         <section id="quote" className="relative overflow-hidden">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div className="absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-neon-cyan/15 blur-3xl" />
@@ -131,6 +133,7 @@ export default function LandingPage() {
             <LeadForm step={step} setStep={setStep} goToStep={goToStep} />
           </div>
         </section>
+        </Reveal>
       </main>
       <SiteFooter />
     </FormProvider>

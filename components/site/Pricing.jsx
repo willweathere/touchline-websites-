@@ -7,9 +7,9 @@ export default function Pricing() {
   return (
     <section id="pricing" className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
       <SectionHeading
-        eyebrow="Ready-made packages"
-        title="Simple, transparent pricing"
-        sub="Three fixed packages — tap any one to see exactly what it looks like and what's included. Want something bespoke instead? Build your own further down."
+        eyebrow="Website packages"
+        title="Our prices"
+        sub="Three simple website packages — tap any one to see exactly what it looks like and what's included. Want something bespoke instead? Build your own further down."
       />
 
       <div className="mt-12 grid gap-5 lg:grid-cols-3">

@@ -36,8 +36,14 @@ export default function LeadForm({ goToStep, step, setStep }) {
     formState: { errors },
   } = useFormContext();
 
-  // Scroll the form into view whenever the step changes.
+  // Scroll the form into view when the user advances a step — but NOT on first
+  // mount/reload, otherwise restoring a saved step jumps the page to the bottom.
+  const didMount = useRef(false);
   useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true;
+      return;
+    }
     topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [step]);
 
