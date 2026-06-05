@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink-950 text-slate-200 antialiased;
+  }
+  /* Offset anchored sections so the sticky nav doesn't cover headings */
+  section[id] {
+    scroll-margin-top: 84px;
+  }
+  input,
+  textarea,
+  select,
+  button {
+    font-size: 16px; /* prevents iOS zoom-on-focus */
+  }
+  ::selection {
+    background: rgba(34, 224, 255, 0.3);
+  }
+}
+
+@layer components {
+  .input-base {
+    @apply w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5
+           text-base text-white placeholder:text-slate-500
+           transition-colors duration-200
+           focus:border-neon-cyan focus:outline-none focus:ring-2 focus:ring-neon-cyan/30;
+  }
+
+  /* Primary neon CTA */
+  .btn-neon {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl
+           bg-gradient-to-r from-neon-cyan to-neon-green px-6 py-3.5
+           text-base font-bold text-ink-950 shadow-glow-green
+           transition-all duration-200 hover:brightness-110 cursor-pointer
+           focus:outline-none focus:ring-2 focus:ring-neon-cyan/50
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  /* Secondary outline button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl
+           border border-white/15 bg-white/[0.03] px-6 py-3.5
+           text-base font-semibold text-white
+           transition-colors duration-200 hover:border-neon-cyan/60 hover:bg-white/[0.06]
+           cursor-pointer focus:outline-none focus:ring-2 focus:ring-neon-cyan/40;
+  }
+
+  .card-surface {
+    @apply rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm;
+  }
+
+  .neon-text {
+    @apply bg-gradient-to-r from-neon-cyan via-neon-green to-neon-cyan bg-clip-text text-transparent;
+  }
+}
+
+/* react-colorful sizing override */
+.react-colorful {
+  width: 100% !important;
+  height: 170px !important;
+}
+.react-colorful__saturation {
+  border-radius: 16px 16px 0 0 !important;
+}
+.react-colorful__hue {
+  height: 26px !important;
+  border-radius: 0 0 16px 16px !important;
+}
+.react-colorful__pointer {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
