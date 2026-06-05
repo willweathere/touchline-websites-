@@ -6,6 +6,7 @@ import { STORAGE_KEY, DEFAULTS } from "./formState";
 import { packageFor } from "./constants";
 import Nav from "./site/Nav";
 import Hero from "./site/Hero";
+import SocialMedia from "./site/SocialMedia";
 import Pricing from "./site/Pricing";
 import Capabilities from "./site/Capabilities";
 import Features from "./site/Features";
@@ -88,6 +89,7 @@ export default function LandingPage() {
       <Nav />
       <main>
         <Hero />
+        <SocialMedia />
         <Pricing />
         <Capabilities />
         <Features />
