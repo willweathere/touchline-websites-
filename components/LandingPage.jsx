@@ -7,6 +7,7 @@ import { packageFor } from "./constants";
 import Nav from "./site/Nav";
 import Hero from "./site/Hero";
 import SocialMedia from "./site/SocialMedia";
+import BeforeAfter from "./site/BeforeAfter";
 import Reveal from "./Reveal";
 import Pricing from "./site/Pricing";
 import Capabilities from "./site/Capabilities";
@@ -91,6 +92,7 @@ export default function LandingPage() {
         <Hero />
         <Reveal><Pricing /></Reveal>
         <Reveal><SocialMedia /></Reveal>
+        <Reveal><BeforeAfter /></Reveal>
         <Reveal><Capabilities /></Reveal>
         <Reveal><Features /></Reveal>
         <Reveal><Growth /></Reveal>
