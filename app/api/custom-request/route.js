@@ -1,4 +1,4 @@
-import { Resend } from "resend";
+import { sendMail, mailerConfigured } from "@/lib/mailer";
 
 export const runtime = "nodejs";
 
@@ -25,12 +25,9 @@ export async function POST(req) {
     return Response.json({ error: "Please enter a valid email." }, { status: 422 });
   if (!message) return Response.json({ error: "Please describe what you need." }, { status: 422 });
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.FROM_EMAIL;
   const owner = process.env.OWNER_EMAIL;
 
-  if (apiKey && from && owner) {
-    const resend = new Resend(apiKey);
+  if (mailerConfigured() && owner) {
     const html = `
       <div style="font-family:Helvetica,Arial,sans-serif;background:#05060B;padding:24px">
         <div style="max-width:520px;margin:0 auto;background:#0A0C13;border:1px solid #1C2233;border-radius:16px;overflow:hidden">
@@ -45,20 +42,18 @@ export async function POST(req) {
           </div>
         </div>
       </div>`;
-    try {
-      await resend.emails.send({
-        from,
-        to: owner,
-        replyTo: email,
-        subject: `Custom request from ${name || email}`,
-        html,
-      });
-    } catch (err) {
-      console.error("[resend] custom-request failed:", err);
+    const res = await sendMail({
+      to: owner,
+      replyTo: email,
+      subject: `Custom request from ${name || email}`,
+      html,
+    });
+    if (!res.ok) {
+      console.error("[mail] custom-request failed:", res.error);
       return Response.json({ error: "Could not send right now. Please try again." }, { status: 502 });
     }
   } else {
-    console.warn("[resend] not configured — custom request not emailed.");
+    console.warn("[mail] not configured — custom request not emailed.");
   }
 
   return Response.json({ ok: true });

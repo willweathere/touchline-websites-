@@ -1,6 +1,6 @@
-import { Resend } from "resend";
 import { getSupabase } from "@/lib/supabase";
 import { normalise, ownerEmail, clientEmail } from "@/lib/format";
+import { sendMail, mailerConfigured } from "@/lib/mailer";
 
 export const runtime = "nodejs";
 
@@ -55,42 +55,25 @@ export async function POST(req) {
     console.warn("[supabase] not configured — skipping DB insert.");
   }
 
-  // 2) Send emails via Resend (owner + client confirmation).
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.FROM_EMAIL; // e.g. "Touchline Websites <hello@touchlinewebsites.co.uk>"
+  // 2) Send emails (owner notification + customer confirmation) via the mailer.
   const owner = process.env.OWNER_EMAIL;
-
-  if (apiKey && from) {
-    const resend = new Resend(apiKey);
+  if (mailerConfigured()) {
     const ownerMsg = ownerEmail(n);
     const clientMsg = clientEmail(n);
-    try {
-      const results = await Promise.allSettled([
-        owner
-          ? resend.emails.send({
-              from,
-              to: owner,
-              replyTo: n.email,
-              subject: ownerMsg.subject,
-              html: ownerMsg.html,
-            })
-          : Promise.resolve("no-owner"),
-        resend.emails.send({
-          from,
-          to: n.email,
-          subject: clientMsg.subject,
-          html: clientMsg.html,
-        }),
-      ]);
-      results.forEach((r, i) => {
-        if (r.status === "rejected")
-          console.error(`[resend] email ${i} failed:`, r.reason);
-      });
-    } catch (err) {
-      console.error("[resend] send error:", err);
-    }
+    const results = await Promise.allSettled([
+      owner
+        ? sendMail({ to: owner, replyTo: n.email, subject: ownerMsg.subject, html: ownerMsg.html })
+        : Promise.resolve({ ok: true }),
+      // Customer "success" confirmation
+      sendMail({ to: n.email, subject: clientMsg.subject, html: clientMsg.html }),
+    ]);
+    results.forEach((r, i) => {
+      const label = i === 0 ? "owner" : "customer";
+      if (r.status === "rejected") console.error(`[mail] ${label} send rejected:`, r.reason);
+      else if (r.value && !r.value.ok) console.error(`[mail] ${label} send failed:`, r.value.error);
+    });
   } else {
-    console.warn("[resend] not configured — skipping emails.");
+    console.warn("[mail] not configured — skipping emails.");
   }
 
   return Response.json({ ok: true });
