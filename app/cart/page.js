@@ -30,8 +30,15 @@ export default function CartPage() {
               {items.map((i) => (
                 <div key={i.value} className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                   <div>
-                    <p className="font-display text-lg font-bold text-white">{i.name} package</p>
-                    <p className="text-sm text-slate-400">£{i.setup} setup · £{i.monthly}/month</p>
+                    <p className="font-display text-lg font-bold text-white">
+                      {i.name}
+                      {i.kind === "social" ? " social" : " package"}
+                    </p>
+                    <p className="text-sm text-slate-400">
+                      {i.kind === "social" || !i.setup
+                        ? `£${i.monthly}/month`
+                        : `£${i.setup} setup · £${i.monthly}/month`}
+                    </p>
                   </div>
                   <button
                     type="button"

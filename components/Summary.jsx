@@ -3,16 +3,20 @@
 import {
   WEBSITE_TYPES,
   BUSINESS_TYPES,
+  ECOMMERCE_PROVIDERS,
+  ECOMMERCE_FEATURES,
   FEATURES,
   labelFor,
   labelsFor,
   packageFor,
 } from "./constants";
+import { SOCIAL_PLANS } from "./siteContent";
 
 // Read-only review of everything entered, with per-section "Edit" links.
 export default function Summary({ values, onEdit }) {
   const pkg = packageFor(values.selectedPackage);
   const features = labelsFor(FEATURES, values.features);
+  const socialPlan = SOCIAL_PLANS.find((p) => p.value === values.socialPlan);
   const hasCustom = values.customRequest || values.needsAdvanced;
 
   return (
@@ -27,6 +31,15 @@ export default function Summary({ values, onEdit }) {
       <Block title="Website type" step={2} onEdit={onEdit}>
         <Row label="Type" value={labelFor(WEBSITE_TYPES, values.websiteType)} />
         <Row label="Business type" value={labelFor(BUSINESS_TYPES, values.businessType)} />
+        {values.businessType === "other" && values.businessTypeOther && (
+          <Row label="Business (other)" value={values.businessTypeOther} />
+        )}
+        {values.websiteType === "ecommerce" && values.ecommerceProvider && (
+          <Row label="Store platform" value={labelFor(ECOMMERCE_PROVIDERS, values.ecommerceProvider)} />
+        )}
+        {values.websiteType === "ecommerce" && values.ecommerceFeatures?.length > 0 && (
+          <Row label="Store needs" value={labelsFor(ECOMMERCE_FEATURES, values.ecommerceFeatures).join(", ")} />
+        )}
       </Block>
 
       <Block title="Features" step={3} onEdit={onEdit}>
@@ -43,6 +56,9 @@ export default function Summary({ values, onEdit }) {
           </div>
         ) : (
           <Row label="Features" value="None selected" />
+        )}
+        {socialPlan && (
+          <Row label="Social plan" value={`${socialPlan.name} — £${socialPlan.monthly}/mo`} />
         )}
       </Block>
 
@@ -61,6 +77,7 @@ export default function Summary({ values, onEdit }) {
         </div>
         {values.exampleWebsites && <Row label="Examples" value={values.exampleWebsites} />}
         {values.styleDescription && <Row label="Style" value={values.styleDescription} />}
+        {values.anythingElse && <Row label="Anything else" value={values.anythingElse} />}
       </Block>
 
       {hasCustom && (

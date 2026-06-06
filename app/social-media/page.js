@@ -2,6 +2,7 @@ import Link from "next/link";
 import Nav from "@/components/site/Nav";
 import SiteFooter from "@/components/site/SiteFooter";
 import Reveal from "@/components/Reveal";
+import AddToCart from "@/components/cart/AddToCart";
 import { SOCIAL_PLANS } from "@/components/siteContent";
 
 export const metadata = {
@@ -92,12 +93,15 @@ export default function SocialMediaPage() {
                     ))}
                   </ul>
 
-                  <Link href="/#custom" className={`mt-7 w-full ${p.popular ? "btn-neon" : "btn-ghost"}`}>
-                    Get started
-                    <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
-                      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </Link>
+                  <div className="mt-7 space-y-2">
+                    <AddToCart
+                      pkg={{ value: p.value, name: p.name, setup: 0, monthly: p.monthly, kind: "social" }}
+                      className={`w-full ${p.popular ? "btn-neon" : "btn-ghost"}`}
+                    />
+                    <Link href="/#custom" className="block text-center text-sm font-medium text-slate-400 hover:text-neon-cyan">
+                      Or enquire first
+                    </Link>
+                  </div>
                 </div>
               </Reveal>
             ))}

@@ -17,6 +17,24 @@ export const BUSINESS_TYPES = [
   { value: "other", label: "Other" },
 ];
 
+// Shown when the user picks "E-commerce" as their website type.
+export const ECOMMERCE_PROVIDERS = [
+  { value: "shopify", label: "Shopify" },
+  { value: "woocommerce", label: "WooCommerce" },
+  { value: "wix", label: "Wix" },
+  { value: "squarespace", label: "Squarespace" },
+  { value: "custom", label: "Build me a custom store" },
+  { value: "unsure", label: "Not sure — advise me" },
+];
+
+export const ECOMMERCE_FEATURES = [
+  { value: "add_products", label: "Add & manage products" },
+  { value: "inventory", label: "Stock / inventory tracking" },
+  { value: "discounts", label: "Discount codes" },
+  { value: "subscriptions", label: "Subscriptions / memberships" },
+  { value: "shipping", label: "Shipping & delivery setup" },
+];
+
 // Form Step 3 — selectable features.
 export const FEATURES = [
   { value: "contact_form", label: "Contact form" },

@@ -34,7 +34,16 @@ export function CartProvider({ children }) {
     setItems((prev) =>
       prev.some((i) => i.value === pkg.value)
         ? prev
-        : [...prev, { value: pkg.value, name: pkg.name, setup: pkg.setup, monthly: pkg.monthly }]
+        : [
+            ...prev,
+            {
+              value: pkg.value,
+              name: pkg.name,
+              setup: pkg.setup || 0,
+              monthly: pkg.monthly || 0,
+              kind: pkg.kind || "website", // "website" | "social"
+            },
+          ]
     );
   const remove = (value) => setItems((prev) => prev.filter((i) => i.value !== value));
   const clear = () => setItems([]);

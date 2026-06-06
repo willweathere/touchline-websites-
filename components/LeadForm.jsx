@@ -7,13 +7,17 @@ import ProgressBar from "./ProgressBar";
 import { Field, OptionCard, StepNav, Spinner } from "./ui";
 import Summary from "./Summary";
 import { STORAGE_KEY, STEP_FIELDS } from "./formState";
+import Link from "next/link";
 import {
   WEBSITE_TYPES,
   BUSINESS_TYPES,
+  ECOMMERCE_PROVIDERS,
+  ECOMMERCE_FEATURES,
   FEATURES,
   PACKAGES,
   STEPS,
 } from "./constants";
+import { SOCIAL_PLANS } from "./siteContent";
 
 const SWATCHES = [
   "#22E0FF", "#3DFFA8", "#FF45C8", "#9B5CFF",
@@ -35,6 +39,11 @@ export default function LeadForm({ goToStep, step, setStep }) {
     getValues,
     formState: { errors },
   } = useFormContext();
+
+  // Watched values that drive the conditional questions below.
+  const websiteType = watch("websiteType");
+  const businessType = watch("businessType");
+  const selectedFeatures = watch("features") || [];
 
   // Scroll the form into view when the user advances a step — but NOT on first
   // mount/reload, otherwise restoring a saved step jumps the page to the bottom.
@@ -127,6 +136,48 @@ export default function LeadForm({ goToStep, step, setStep }) {
                   </Group>
                 )}
               />
+
+              {/* E-commerce follow-ups (only when "E-commerce" is chosen) */}
+              {websiteType === "ecommerce" && (
+                <div className="space-y-5 rounded-2xl border border-neon-purple/30 bg-neon-purple/[0.06] p-4 animate-fade-in">
+                  <Controller
+                    control={control}
+                    name="ecommerceProvider"
+                    render={({ field }) => (
+                      <Group label="Which store platform do you use (or want)?">
+                        <div className="grid grid-cols-2 gap-3">
+                          {ECOMMERCE_PROVIDERS.map((o) => (
+                            <OptionCard key={o.value} title={o.label}
+                              selected={field.value === o.value} onClick={() => field.onChange(o.value)} />
+                          ))}
+                        </div>
+                      </Group>
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name="ecommerceFeatures"
+                    render={({ field }) => {
+                      const toggle = (val) => {
+                        const set = new Set(getValues("ecommerceFeatures") || []);
+                        set.has(val) ? set.delete(val) : set.add(val);
+                        field.onChange([...set]);
+                      };
+                      return (
+                        <Group label="What do you need the store to do?">
+                          <div className="space-y-2">
+                            {ECOMMERCE_FEATURES.map((o) => (
+                              <OptionCard key={o.value} title={o.label} multi
+                                selected={field.value?.includes(o.value)} onClick={() => toggle(o.value)} />
+                            ))}
+                          </div>
+                        </Group>
+                      );
+                    }}
+                  />
+                </div>
+              )}
+
               <Controller
                 control={control}
                 name="businessType"
@@ -142,6 +193,15 @@ export default function LeadForm({ goToStep, step, setStep }) {
                   </Group>
                 )}
               />
+
+              {/* Free-text when "Other" business type is chosen */}
+              {businessType === "other" && (
+                <Field label="Tell us your business type" htmlFor="businessTypeOther">
+                  <input id="businessTypeOther" className="input-base animate-fade-in"
+                    placeholder="e.g. dog groomer, photographer, charity…"
+                    {...register("businessTypeOther")} />
+                </Field>
+              )}
             </Section>
           )}
 
@@ -169,6 +229,39 @@ export default function LeadForm({ goToStep, step, setStep }) {
                   );
                 }}
               />
+
+              {/* Social media plans surface when "Social integration" is picked */}
+              {selectedFeatures.includes("social_integration") && (
+                <div className="rounded-2xl border border-neon-pink/30 bg-neon-pink/[0.06] p-4 animate-fade-in">
+                  <p className="text-sm font-semibold text-white">Want us to run your social media too?</p>
+                  <p className="mt-1 text-sm text-slate-400">
+                    Pick a plan to add to your enquiry (optional) — or browse the full details.
+                  </p>
+                  <Controller
+                    control={control}
+                    name="socialPlan"
+                    render={({ field }) => (
+                      <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                        {SOCIAL_PLANS.map((p) => (
+                          <button key={p.value} type="button"
+                            onClick={() => field.onChange(field.value === p.value ? "" : p.value)}
+                            className={`rounded-xl border p-3 text-left transition-colors
+                              ${field.value === p.value
+                                ? "border-neon-pink bg-neon-pink/10"
+                                : "border-white/10 bg-white/[0.03] hover:border-white/25"}`}>
+                            <span className="block text-sm font-bold text-white">{p.name}</span>
+                            <span className="block text-sm font-semibold text-neon-pink">£{p.monthly}/mo</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  />
+                  <Link href="/social-media" target="_blank"
+                    className="mt-3 inline-block text-sm font-semibold text-neon-cyan hover:text-white">
+                    See full social media plans →
+                  </Link>
+                </div>
+              )}
             </Section>
           )}
 
@@ -220,6 +313,12 @@ export default function LeadForm({ goToStep, step, setStep }) {
                 <textarea id="styleDescription" rows={3} className="input-base resize-none"
                   placeholder="Bold and modern, dark theme, neon accents, easy to book…"
                   {...register("styleDescription")} />
+              </Field>
+
+              <Field label="Anything else?" htmlFor="anythingElse" optional>
+                <textarea id="anythingElse" rows={3} className="input-base resize-none"
+                  placeholder="Anything else we should know — deadlines, must-haves, questions…"
+                  {...register("anythingElse")} />
               </Field>
             </Section>
           )}

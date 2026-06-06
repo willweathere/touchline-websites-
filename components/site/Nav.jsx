@@ -7,7 +7,6 @@ const LINKS = [
   { href: "/#social", label: "Social media" },
   { href: "/#pricing", label: "Pricing" },
   { href: "/#capabilities", label: "What we build" },
-  { href: "/#work", label: "Our work" },
   { href: "/#results", label: "Results" },
 ];
 

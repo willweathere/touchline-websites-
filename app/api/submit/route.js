@@ -43,7 +43,7 @@ export async function POST(req) {
       primary_color: n.primaryColor,
       example_websites: n.exampleWebsites || null,
       style_description: n.styleDescription || null,
-      custom_request: n.customRequest || null,
+      custom_request: n.notes || n.customRequest || null,
       needs_advanced: n.needsAdvanced,
       selected_package: n.selectedPackage,
       package_setup: n.package?.setup ?? null,

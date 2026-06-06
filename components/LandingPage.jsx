@@ -12,7 +12,6 @@ import Pricing from "./site/Pricing";
 import Capabilities from "./site/Capabilities";
 import Features from "./site/Features";
 import Growth from "./site/Growth";
-import Work from "./site/Work";
 import CustomRequest from "./site/CustomRequest";
 import SiteFooter from "./site/SiteFooter";
 import LeadForm from "./LeadForm";
@@ -95,7 +94,6 @@ export default function LandingPage() {
         <Reveal><Capabilities /></Reveal>
         <Reveal><Features /></Reveal>
         <Reveal><Growth /></Reveal>
-        <Reveal><Work /></Reveal>
         <Reveal><CustomRequest /></Reveal>
 
         {/* Build-your-own custom site (separate from the 3 fixed packages) */}
