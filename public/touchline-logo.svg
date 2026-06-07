@@ -1,0 +1,31 @@
+<svg width="156" height="116" viewBox="0 0 156 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="tlGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22E0FF"/>
+      <stop offset="0.55" stop-color="#22E0FF"/>
+      <stop offset="1" stop-color="#9B5CFF"/>
+    </linearGradient>
+    <filter id="tlGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="starGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="sb"/>
+      <feMerge>
+        <feMergeNode in="sb"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#tlGlow)" stroke="url(#tlGrad)" stroke-width="4.5" stroke-linejoin="round" fill="#0A0C13">
+    <path d="M12 26 H76 V42 H52 V98 H36 V42 H12 Z"/>
+    <path d="M64 40 H80 V82 H122 V98 H64 Z"/>
+  </g>
+  <g filter="url(#starGlow)">
+    <path d="M135 20 L139 31 L150 35 L139 39 L135 50 L131 39 L120 35 L131 31 Z" fill="#3DFFA8" stroke="#3DFFA8" stroke-width="1.5" stroke-linejoin="round"/>
+  </g>
+</svg>

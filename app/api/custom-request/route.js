@@ -31,8 +31,9 @@ export async function POST(req) {
     const html = `
       <div style="font-family:Helvetica,Arial,sans-serif;background:#05060B;padding:24px">
         <div style="max-width:520px;margin:0 auto;background:#0A0C13;border:1px solid #1C2233;border-radius:16px;overflow:hidden">
-          <div style="background:linear-gradient(90deg,#9B5CFF,#22E0FF);padding:20px 24px">
-            <p style="margin:0;color:#05060B;font-size:18px;font-weight:800">Custom request</p>
+          <div style="background:#0A0C13;padding:18px 24px;border-bottom:1px solid #1C2233">
+            <img src="https://touchlineweb.netlify.app/touchline-logo.png" alt="Touchline" height="34" style="display:inline-block;vertical-align:middle;border:0" />
+            <span style="display:inline-block;vertical-align:middle;margin-left:10px;color:#FFFFFF;font-size:16px;font-weight:800">Custom request</span>
           </div>
           <div style="padding:24px;color:#E6E9F2">
             <p style="margin:0 0 12px"><strong>From:</strong> ${esc(name || "—")} &lt;${esc(email)}&gt;</p>

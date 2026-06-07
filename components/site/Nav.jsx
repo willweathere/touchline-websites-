@@ -17,11 +17,8 @@ export default function Nav() {
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink-950/80 backdrop-blur-md">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
         <Link href="/" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-r from-neon-cyan to-neon-green text-ink-950 shadow-glow-green">
-            <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-              <path d="M4 13.5 9.5 19 20 6.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/touchline-logo.svg" alt="Touchline" className="h-9 w-auto" />
           <span className="font-display text-lg font-bold tracking-tight text-white">
             Touchline
           </span>
