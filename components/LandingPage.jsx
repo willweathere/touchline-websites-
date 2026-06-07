@@ -6,8 +6,8 @@ import { STORAGE_KEY, DEFAULTS } from "./formState";
 import { packageFor } from "./constants";
 import Nav from "./site/Nav";
 import Hero from "./site/Hero";
+import Link from "next/link";
 import SocialMedia from "./site/SocialMedia";
-import BeforeAfter from "./site/BeforeAfter";
 import Reveal from "./Reveal";
 import Pricing from "./site/Pricing";
 import Capabilities from "./site/Capabilities";
@@ -92,7 +92,32 @@ export default function LandingPage() {
         <Hero />
         <Reveal><Pricing /></Reveal>
         <Reveal><SocialMedia /></Reveal>
-        <Reveal><BeforeAfter /></Reveal>
+
+        {/* Teaser → full before/after page */}
+        <Reveal>
+          <section className="mx-auto max-w-5xl px-4 py-12 sm:py-16">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-neon-cyan/[0.07] via-transparent to-neon-purple/[0.07] p-8 text-center sm:p-12">
+              <div aria-hidden="true" className="pointer-events-none absolute -top-16 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-neon-cyan/15 blur-3xl" />
+              <div className="relative">
+                <p className="text-sm font-bold uppercase tracking-widest text-neon-cyan">See the difference</p>
+                <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-white sm:text-4xl">
+                  See what your website could become
+                </h2>
+                <p className="mx-auto mt-3 max-w-xl text-slate-300">
+                  Drag through a live before-and-after and watch an outdated site transform into a modern,
+                  conversion-focused one — for your industry.
+                </p>
+                <Link href="/transformation" className="btn-neon group mt-6">
+                  See the before &amp; after
+                  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </section>
+        </Reveal>
+
         <Reveal><Capabilities /></Reveal>
         <Reveal><Features /></Reveal>
         <Reveal><Growth /></Reveal>
