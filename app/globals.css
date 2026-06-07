@@ -75,6 +75,16 @@
   }
 }
 
+/* Mobile performance: cap heavy decorative blur radii so the many neon-glow
+   layers don't choke phone GPUs (which can leave the page blank/stuck). */
+@media (max-width: 640px) {
+  [class*="blur-3xl"],
+  [class*="blur-2xl"],
+  [class*="blur-["] {
+    filter: blur(20px) !important;
+  }
+}
+
 /* react-colorful sizing override */
 .react-colorful {
   width: 100% !important;
