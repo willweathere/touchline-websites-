@@ -5,6 +5,7 @@ import { useCart } from "../cart/CartProvider";
 
 const LINKS = [
   { href: "/#social", label: "Social media" },
+  { href: "/#automation", label: "Automation" },
   { href: "/#pricing", label: "Pricing" },
   { href: "/#capabilities", label: "What we build" },
   { href: "/#results", label: "Results" },
